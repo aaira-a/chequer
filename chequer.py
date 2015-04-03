@@ -17,3 +17,10 @@ def get_decimals(numstr):
 
 def parse_single_digit(numstr):
     return WORDS[numstr]
+
+
+def parse_two_digits(numstr):
+    if numstr is '10':
+        return 'sepuluh'
+    else:
+        return WORDS[numstr[0]] + ' puluh'

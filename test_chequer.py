@@ -2,6 +2,7 @@ from chequer import (
     get_decimals,
     get_digits,
     parse_single_digit,
+    parse_two_digits,
     )
 
 import unittest
@@ -32,3 +33,15 @@ class ParseSingleDigitTest(unittest.TestCase):
 
         for key in expected_results.keys():
             self.assertEqual(parse_single_digit(key), expected_results[key])
+
+
+class ParseTwoDigitsTest(unittest.TestCase):
+
+    def test_exact_multiple_of_10s(self):
+        expected_results = {
+            '10': 'sepuluh', '20': 'dua puluh', '30': 'tiga puluh',
+            '40': 'empat puluh', '50': 'lima puluh', '60': 'enam puluh',
+            '70': 'tujuh puluh', '80': 'lapan puluh', '90': 'sembilan puluh'}
+
+        for key in expected_results.keys():
+            self.assertEqual(parse_two_digits(key), expected_results[key])
