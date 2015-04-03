@@ -23,34 +23,36 @@ class GetDigitsGetDecimalsTest(unittest.TestCase):
         self.assertEqual(get_decimals('567'), None)
 
 
-class ParseSingleDigitTest(unittest.TestCase):
+class DictComparator(unittest.TestCase):
+
+    def compare(self, function):
+
+        for keys in self.expected_results.keys():
+            self.assertEqual(function(keys), self.expected_results[keys])
+
+
+class ParseSingleDigitTest(DictComparator):
 
     def test_1_to_9(self):
-        expected_results = {
+        self.expected_results = {
             '1': 'satu', '2': 'dua', '3': 'tiga', '4': 'empat',
             '5': 'lima', '6': 'enam', '7': 'tujuh', '8': 'lapan',
             '9': 'sembilan'}
-
-        for key in expected_results.keys():
-            self.assertEqual(parse_single_digit(key), expected_results[key])
+        self.compare(parse_single_digit)
 
 
-class ParseTwoDigitsTest(unittest.TestCase):
+class ParseTwoDigitsTest(DictComparator):
 
     def test_exact_multiple_of_10s(self):
-        expected_results = {
+        self.expected_results = {
             '10': 'sepuluh', '20': 'dua puluh', '30': 'tiga puluh',
             '40': 'empat puluh', '50': 'lima puluh', '60': 'enam puluh',
             '70': 'tujuh puluh', '80': 'lapan puluh', '90': 'sembilan puluh'}
-
-        for key in expected_results.keys():
-            self.assertEqual(parse_two_digits(key), expected_results[key])
+        self.compare(parse_two_digits)
 
     def test_teens(self):
-        expected_results = {
+        self.expected_results = {
             '11': 'sebelas', '12': 'dua belas', '13': 'tiga belas',
             '14': 'empat belas', '15': 'lima belas', '16': 'enam belas',
             '17': 'tujuh belas', '18': 'lapan belas', '19': 'sembilan belas'}
-
-        for key in expected_results.keys():
-            self.assertEqual(parse_two_digits(key), expected_results[key])
+        self.compare(parse_two_digits)
