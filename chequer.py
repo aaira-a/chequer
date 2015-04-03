@@ -30,5 +30,8 @@ def parse_two_digits(numstr):
         else:
             return WORDS[numstr[1]] + ' belas'
 
-    else:
+    elif numstr[1] is '0':
         return WORDS[numstr[0]] + ' puluh'
+
+    else:
+        return WORDS[numstr[0]] + ' puluh ' + WORDS[numstr[1]]

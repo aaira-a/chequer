@@ -56,3 +56,9 @@ class ParseTwoDigitsTest(DictComparator):
             '14': 'empat belas', '15': 'lima belas', '16': 'enam belas',
             '17': 'tujuh belas', '18': 'lapan belas', '19': 'sembilan belas'}
         self.compare(parse_two_digits)
+
+    def test_non_10_multiples_non_teen(self):
+        self.expected_results = {
+            '53': 'lima puluh tiga', '99': 'sembilan puluh sembilan',
+            '87': 'lapan puluh tujuh', '26': 'dua puluh enam'}
+        self.compare(parse_two_digits)
