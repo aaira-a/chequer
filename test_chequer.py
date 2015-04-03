@@ -45,3 +45,12 @@ class ParseTwoDigitsTest(unittest.TestCase):
 
         for key in expected_results.keys():
             self.assertEqual(parse_two_digits(key), expected_results[key])
+
+    def test_teens(self):
+        expected_results = {
+            '11': 'sebelas', '12': 'dua belas', '13': 'tiga belas',
+            '14': 'empat belas', '15': 'lima belas', '16': 'enam belas',
+            '17': 'tujuh belas', '18': 'lapan belas', '19': 'sembilan belas'}
+
+        for key in expected_results.keys():
+            self.assertEqual(parse_two_digits(key), expected_results[key])
