@@ -20,18 +20,23 @@ def parse_single_digit(numstr):
 
 
 def parse_two_digits(numstr):
-    if numstr[0] is '1':
-        if numstr is '10':
-            return 'sepuluh'
+    if numstr is '00':
+        return None
 
-        elif numstr is '11':
-            return 'sebelas'
+    elif numstr is '10':
+        return 'sepuluh'
 
-        else:
-            return WORDS[numstr[1]] + ' belas'
+    elif numstr is '11':
+        return 'sebelas'
+
+    elif numstr[0] is '1':
+        return WORDS[numstr[1]] + ' belas'
 
     elif numstr[1] is '0':
         return WORDS[numstr[0]] + ' puluh'
 
-    else:
+    elif numstr[0] is not '0' and numstr[1] is not '0':
         return WORDS[numstr[0]] + ' puluh ' + WORDS[numstr[1]]
+
+    elif numstr[0] is '0':
+        return WORDS[numstr[1]]
