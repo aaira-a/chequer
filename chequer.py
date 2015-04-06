@@ -20,23 +20,27 @@ def parse_single_digit(numstr):
 
 
 def parse_two_digits(numstr):
-    if numstr is '00':
+    if numstr == '00':
         return None
 
-    elif numstr is '10':
+    elif numstr == '10':
         return 'sepuluh'
 
-    elif numstr is '11':
+    elif numstr == '11':
         return 'sebelas'
 
-    elif numstr[0] is '1':
+    elif numstr[0] == '1':
         return WORDS[numstr[1]] + ' belas'
 
-    elif numstr[1] is '0':
+    elif numstr[1] == '0':
         return WORDS[numstr[0]] + ' puluh'
 
-    elif numstr[0] is not '0' and numstr[1] is not '0':
+    else:
         return WORDS[numstr[0]] + ' puluh ' + WORDS[numstr[1]]
 
-    elif numstr[0] is '0':
-        return WORDS[numstr[1]]
+
+def parse_three_digits(numstr):
+    builder = []
+    builder.append(parse_single_digit(numstr[0]) + ' ratus ')
+    builder.append(parse_two_digits(numstr[1:3:]))
+    return ''.join(x for x in builder if x is not None).strip()

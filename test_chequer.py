@@ -2,6 +2,7 @@ from chequer import (
     get_decimals,
     get_digits,
     parse_single_digit,
+    parse_three_digits,
     parse_two_digits,
     )
 
@@ -62,3 +63,15 @@ class ParseTwoDigitsTest(DictComparator):
             '53': 'lima puluh tiga', '99': 'sembilan puluh sembilan',
             '87': 'lapan puluh tujuh', '26': 'dua puluh enam'}
         self.compare(parse_two_digits)
+
+
+class ParseThreeDigitsTest(DictComparator):
+
+    def test_random_three_digits(self):
+        self.expected_results = {
+            '111': 'satu ratus sebelas',
+            '153': 'satu ratus lima puluh tiga',
+            '400': 'empat ratus',
+            '530': 'lima ratus tiga puluh',
+            '712': 'tujuh ratus dua belas'}
+        self.compare(parse_three_digits)
