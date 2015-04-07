@@ -1,6 +1,6 @@
 
 WORDS = {'1': 'satu', '2': 'dua', '3': 'tiga', '4': 'empat', '5': 'lima',
-         '6': 'enam', '7': 'tujuh', '8': 'lapan', '9': 'sembilan',
+         '6': 'enam', '7': 'tujuh', '8': 'lapan', '9': 'sembilan', '0': None,
          }
 
 
@@ -57,10 +57,17 @@ def parse_three_digits(numstr):
 
 
 def parse_four_digits(numstr):
-    builder = []
-    builder.append(parse_single_digit(numstr[0]) + ' ribu ')
-    builder.append(parse_three_digits(numstr[1:4:]))
-    return ''.join(x for x in builder if x is not None).strip()
+    if is_all_zero(numstr):
+        return None
+
+    elif is_first_digit_zero(numstr):
+        return parse_three_digits(numstr[1:4:])
+
+    else:
+        builder = []
+        builder.append(parse_single_digit(numstr[0]) + ' ribu ')
+        builder.append(parse_three_digits(numstr[1:4:]))
+        return ''.join(x for x in builder if x is not None).strip()
 
 
 def is_all_zero(numstr):

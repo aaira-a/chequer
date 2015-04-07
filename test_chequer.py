@@ -57,7 +57,7 @@ class ParseSingleDigitTest(DictComparator):
         self.expected_results = {
             '1': 'satu', '2': 'dua', '3': 'tiga', '4': 'empat',
             '5': 'lima', '6': 'enam', '7': 'tujuh', '8': 'lapan',
-            '9': 'sembilan'}
+            '9': 'sembilan', '0': None}
         self.compare(parse_single_digit)
 
 
@@ -79,6 +79,8 @@ class ParseTwoDigitsTest(DictComparator):
 
     def test_non_10_multiples_non_teen(self):
         self.expected_results = {
+            '00':  None,
+            '01': 'satu',
             '53': 'lima puluh tiga', '99': 'sembilan puluh sembilan',
             '87': 'lapan puluh tujuh', '26': 'dua puluh enam'}
         self.compare(parse_two_digits)
@@ -88,6 +90,9 @@ class ParseThreeDigitsTest(DictComparator):
 
     def test_random_three_digits(self):
         self.expected_results = {
+            '000':  None,
+            '003': 'tiga',
+            '010': 'sepuluh',
             '111': 'satu ratus sebelas',
             '153': 'satu ratus lima puluh tiga',
             '400': 'empat ratus',
@@ -100,6 +105,10 @@ class ParseFourDigitsTest(DictComparator):
 
     def test_random_four_digits(self):
         self.expected_results = {
+            '0000':  None,
+            '0005': 'lima',
+            '0020': 'dua puluh',
+            '0100': 'satu ratus',
             '1000': 'satu ribu',
             '1111': 'satu ribu satu ratus sebelas',
             '2500': 'dua ribu lima ratus',
