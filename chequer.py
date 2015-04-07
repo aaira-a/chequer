@@ -20,7 +20,7 @@ def parse_single_digit(numstr):
 
 
 def parse_two_digits(numstr):
-    if numstr == '00':
+    if is_all_zero(numstr):
         return None
 
     elif numstr == '10':
@@ -35,7 +35,7 @@ def parse_two_digits(numstr):
     elif numstr[1] == '0':
         return WORDS[numstr[0]] + ' puluh'
 
-    elif numstr[0] == '0':
+    elif is_first_digit_zero(numstr):
         return parse_single_digit(numstr[1])
 
     else:
@@ -43,10 +43,10 @@ def parse_two_digits(numstr):
 
 
 def parse_three_digits(numstr):
-    if numstr == '000':
+    if is_all_zero(numstr):
         return None
 
-    elif numstr[0] == '0':
+    elif is_first_digit_zero(numstr):
         return parse_two_digits(numstr[1:3:])
 
     else:
@@ -61,3 +61,14 @@ def parse_four_digits(numstr):
     builder.append(parse_single_digit(numstr[0]) + ' ribu ')
     builder.append(parse_three_digits(numstr[1:4:]))
     return ''.join(x for x in builder if x is not None).strip()
+
+
+def is_all_zero(numstr):
+    truth = []
+    for digit in numstr:
+        truth.append(bool(digit == '0'))
+    return all(truth)
+
+
+def is_first_digit_zero(numstr):
+    return bool(numstr[0] == '0')

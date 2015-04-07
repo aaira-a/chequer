@@ -1,6 +1,8 @@
 from chequer import (
     get_decimals,
     get_digits,
+    is_all_zero,
+    is_first_digit_zero,
     parse_four_digits,
     parse_single_digit,
     parse_three_digits,
@@ -31,6 +33,22 @@ class DictComparator(unittest.TestCase):
 
         for keys in self.expected_results.keys():
             self.assertEqual(function(keys), self.expected_results[keys])
+
+
+class ZeroTest(DictComparator):
+
+    def test_is_all_zero(self):
+        self.expected_results = {
+            '0': True, '1': False,
+            '00': True, '01': False, '11': False,
+            '000': True, '001': False, '010': False}
+        self.compare(is_all_zero)
+
+    def test_is_first_digit_zero(self):
+        self.expected_results = {
+            '0': True, '1': False,
+            '00': True, '01': True, '10': False,
+            '000': True, '010': True, '100': False}
 
 
 class ParseSingleDigitTest(DictComparator):
