@@ -6,6 +6,7 @@ from chequer import (
     parse_five_digits,
     parse_four_digits,
     parse_single_digit,
+    parse_six_digits,
     parse_three_digits,
     parse_two_digits,
     )
@@ -134,3 +135,18 @@ class ParseFiveDigitsTest(DictComparator):
             '21567': 'dua puluh satu ribu lima ratus enam puluh tujuh',
             '31702': 'tiga puluh satu ribu tujuh ratus dua'}
         self.compare(parse_five_digits)
+
+
+class ParseSixDigitsTest(DictComparator):
+
+    def test_random_six_digits(self):
+        self.expected_results = {
+            '000000':  None,
+            '000010': 'sepuluh',
+            '000100': 'satu ratus',
+            '001000': 'satu ribu',
+            '010000': 'sepuluh ribu',
+            '100000': 'satu ratus ribu',
+            '111111': 'satu ratus sebelas ribu satu ratus sebelas',
+            '123456': 'satu ratus dua puluh tiga ribu empat ratus lima puluh enam'}
+        self.compare(parse_six_digits)
