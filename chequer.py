@@ -98,6 +98,20 @@ def parse_six_digits(numstr):
         return ''.join(x for x in builder if x is not None).strip()
 
 
+def parse_seven_digits(numstr):
+    if is_all_zero(numstr):
+        return None
+
+    elif is_first_digit_zero(numstr):
+        return parse_six_digits(numstr[1:7:])
+
+    else:
+        builder = []
+        builder.append(parse_single_digit(numstr[0]) + ' juta ')
+        builder.append(parse_six_digits(numstr[1:7:]))
+        return ''.join(x for x in builder if x is not None).strip()
+
+
 def is_all_zero(numstr):
     truth = []
     for digit in numstr:
