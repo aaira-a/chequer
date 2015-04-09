@@ -70,6 +70,20 @@ def parse_four_digits(numstr):
         return ''.join(x for x in builder if x is not None).strip()
 
 
+def parse_five_digits(numstr):
+    if is_all_zero(numstr):
+        return None
+
+    elif is_first_digit_zero(numstr):
+        return parse_four_digits(numstr[1:5:])
+
+    else:
+        builder = []
+        builder.append(parse_two_digits(numstr[0:2]) + ' ribu ')
+        builder.append(parse_three_digits(numstr[2:5:]))
+        return ''.join(x for x in builder if x is not None).strip()
+
+
 def is_all_zero(numstr):
     truth = []
     for digit in numstr:

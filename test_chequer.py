@@ -3,6 +3,7 @@ from chequer import (
     get_digits,
     is_all_zero,
     is_first_digit_zero,
+    parse_five_digits,
     parse_four_digits,
     parse_single_digit,
     parse_three_digits,
@@ -116,3 +117,20 @@ class ParseFourDigitsTest(DictComparator):
             '4313': 'empat ribu tiga ratus tiga belas',
             '9001': 'sembilan ribu satu'}
         self.compare(parse_four_digits)
+
+
+class ParseFiveDigitsTest(DictComparator):
+
+    def test_random_five_digits(self):
+        self.expected_results = {
+            '00000':  None,
+            '00010': 'sepuluh',
+            '00100': 'satu ratus',
+            '01000': 'satu ribu',
+            '10000': 'sepuluh ribu',
+            '11000': 'sebelas ribu',
+            '13050': 'tiga belas ribu lima puluh',
+            '15001': 'lima belas ribu satu',
+            '21567': 'dua puluh satu ribu lima ratus enam puluh tujuh',
+            '31702': 'tiga puluh satu ribu tujuh ratus dua'}
+        self.compare(parse_five_digits)
