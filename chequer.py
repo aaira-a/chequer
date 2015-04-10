@@ -5,14 +5,33 @@ WORDS = {'1': 'satu', '2': 'dua', '3': 'tiga', '4': 'empat', '5': 'lima',
 
 
 def get_digits(numstr):
-    return numstr.split('.')[0]
+    try:
+        temp = numstr.split('.')[0]
+        if temp == '':
+            return None
+
+        else:
+            return temp
+
+    except:
+        return None
 
 
 def get_decimals(numstr):
     try:
-        return numstr.split('.')[1]
+        temp = numstr.split('.')[1]
+        
+        if len(temp) == 2:
+            return temp
+
+        elif len(temp) == 1:
+            return temp + '0'
+
+        elif len(temp) > 2:
+            return temp[0:2:]
+
     except:
-        ValueError
+        return None
 
 
 def parse_single_digit(numstr):
@@ -121,3 +140,16 @@ def is_all_zero(numstr):
 
 def is_first_digit_zero(numstr):
     return bool(numstr[0] == '0')
+
+
+def is_valid_positive_number(numstr):
+    try:
+        number = float(numstr)
+        if number > 0:
+            return True
+
+        else:
+            return False
+        
+    except:
+        return False

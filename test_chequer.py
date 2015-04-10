@@ -3,6 +3,7 @@ from chequer import (
     get_digits,
     is_all_zero,
     is_first_digit_zero,
+    is_valid_positive_number,
     parse_five_digits,
     parse_four_digits,
     parse_seven_digits,
@@ -17,6 +18,9 @@ import unittest
 
 class GetDigitsGetDecimalsTest(unittest.TestCase):
 
+    def test_get_digits_for_number_with_no_digits(self):
+        self.assertEqual(get_digits('.56'), None)
+
     def test_get_digits_for_number_with_no_decimals(self):
         self.assertEqual(get_digits('123'), '123')
 
@@ -29,6 +33,12 @@ class GetDigitsGetDecimalsTest(unittest.TestCase):
     def test_get_decimals_for_number_with_no_decimals(self):
         self.assertEqual(get_decimals('567'), None)
 
+    def test_get_decimals_for_number_with_one_decimal_digit(self):
+        self.assertEqual(get_decimals('678.9'), '90')
+
+    def test_get_decimals_for_number_with_three_decimal_digits_should_be_truncated(self):
+        self.assertEqual(get_decimals('345.678'), '67')
+
 
 class DictComparator(unittest.TestCase):
 
@@ -36,6 +46,19 @@ class DictComparator(unittest.TestCase):
 
         for keys in self.expected_results.keys():
             self.assertEqual(function(keys), self.expected_results[keys])
+
+
+class NumberValidationTest(DictComparator):
+
+    def test_number_validation(self):
+        self.expected_results = {
+            '123.45': True,
+            '0.56': True,
+            '0.1': True,
+            '12ac': False,
+            '-123': False,
+            '654.32423': True}
+        self.compare(is_valid_positive_number)
 
 
 class ZeroTest(DictComparator):
@@ -52,6 +75,7 @@ class ZeroTest(DictComparator):
             '0': True, '1': False,
             '00': True, '01': True, '10': False,
             '000': True, '010': True, '100': False}
+        self.compare(is_first_digit_zero)
 
 
 class ParseSingleDigitTest(DictComparator):
