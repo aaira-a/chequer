@@ -1,6 +1,7 @@
 from chequer import (
     get_decimals,
     get_digits,
+    get_padded_digits_to_max_parser_limit,
     is_all_zero,
     is_first_digit_zero,
     is_valid_positive_number,
@@ -48,6 +49,18 @@ class DictComparator(unittest.TestCase):
             self.assertEqual(function(keys), self.expected_results[keys])
 
 
+class NumberPaddingTest(DictComparator):
+
+    def test_padding_digits(self):
+        self.expected_results = {
+            '1': '0000001',
+            '23': '0000023',
+            '001234': '0001234',
+            '1234567': '1234567',
+            '12345678': '1234567'}
+        self.compare(get_padded_digits_to_max_parser_limit)
+
+
 class NumberValidationTest(DictComparator):
 
     def test_number_validation(self):
@@ -57,7 +70,8 @@ class NumberValidationTest(DictComparator):
             '0.1': True,
             '12ac': False,
             '-123': False,
-            '654.32423': True}
+            '654.32423': True,
+            '000100.00': True}
         self.compare(is_valid_positive_number)
 
 

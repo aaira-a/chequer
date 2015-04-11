@@ -20,7 +20,7 @@ def get_digits(numstr):
 def get_decimals(numstr):
     try:
         temp = numstr.split('.')[1]
-        
+
         if len(temp) == 2:
             return temp
 
@@ -32,6 +32,17 @@ def get_decimals(numstr):
 
     except:
         return None
+
+
+def get_padded_digits_to_max_parser_limit(numstr):
+    if len(numstr) < 7:
+        return numstr.zfill(7)
+
+    elif len(numstr) > 7:
+        return numstr[0:7:]
+
+    else:
+        return numstr
 
 
 def parse_single_digit(numstr):
@@ -150,6 +161,6 @@ def is_valid_positive_number(numstr):
 
         else:
             return False
-        
+
     except:
         return False
