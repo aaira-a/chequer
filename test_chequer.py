@@ -1,4 +1,5 @@
 from chequer import (
+    chequer_main,
     get_decimals,
     get_digits,
     get_padded_digits_to_max_parser_limit,
@@ -204,3 +205,24 @@ class ParseSevenDigitsTest(DictComparator):
             '1111111': 'satu juta satu ratus sebelas ribu satu ratus sebelas',
             '1234567': 'satu juta dua ratus tiga puluh empat ribu lima ratus enam puluh tujuh'}
         self.compare(parse_seven_digits)
+
+
+class ChequerPublicInterfaceTest(DictComparator):
+
+    def test_final_words_should_be_capitalised(self):
+        self.assertTrue(chequer_main('15.35').isupper())
+
+    def test_random_use_cases(self):
+        self.expected_results = {
+            '5': 'RINGGIT MALAYSIA LIMA SAHAJA',
+            '6.10': 'RINGGIT MALAYSIA ENAM DAN SEN SEPULUH SAHAJA',
+            '7.0': 'RINGGIT MALAYSIA TUJUH SAHAJA',
+            '8.1': 'RINGGIT MALAYSIA LAPAN DAN SEN SEPULUH SAHAJA',
+            '9.01': 'RINGGIT MALAYSIA SEMBILAN DAN SEN SATU SAHAJA',
+            '15.00': 'RINGGIT MALAYSIA LIMA BELAS SAHAJA',
+            '0.45': 'RINGGIT MALAYSIA SIFAR DAN SEN EMPAT PULUH LIMA SAHAJA',
+            '10.51': 'RINGGIT MALAYSIA SEPULUH DAN SEN LIMA PULUH SATU SAHAJA',
+            '43500': 'RINGGIT MALAYSIA EMPAT PULUH TIGA RIBU LIMA RATUS SAHAJA',
+            '1234567.89': 'RINGGIT MALAYSIA SATU JUTA DUA RATUS TIGA PULUH EMPAT RIBU LIMA RATUS ENAM PULUH TUJUH DAN SEN LAPAN PULUH SEMBILAN SAHAJA',
+            }
+        self.compare(chequer_main)

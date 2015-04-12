@@ -4,6 +4,29 @@ WORDS = {'1': 'satu', '2': 'dua', '3': 'tiga', '4': 'empat', '5': 'lima',
          }
 
 
+def chequer_main(numstr):
+    if is_valid_positive_number(numstr):
+        digits = get_digits(numstr)
+        digits = get_padded_digits_to_max_parser_limit(digits)
+        decimals = get_decimals(numstr)
+
+        parsed_digits = parse_seven_digits(digits)
+
+        if decimals is None:
+            parsed_decimals = ''
+
+        else:
+            parsed_decimals = parse_two_digits(decimals)
+
+        if parsed_digits is None:
+            parsed_digits = 'sifar'
+
+        if parsed_decimals is not '':
+            parsed_decimals = ' dan sen ' + parsed_decimals
+
+        return ('ringgit malaysia ' + parsed_digits + parsed_decimals + ' sahaja').upper()
+
+
 def get_digits(numstr):
     try:
         temp = numstr.split('.')[0]
@@ -21,7 +44,10 @@ def get_decimals(numstr):
     try:
         temp = numstr.split('.')[1]
 
-        if len(temp) == 2:
+        if temp == '0' or temp == '00':
+            return None
+
+        elif len(temp) == 2:
             return temp
 
         elif len(temp) == 1:
