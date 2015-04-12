@@ -1,8 +1,16 @@
 <!DOCTYPE html>
 <html>
-	<head>
-    	<title>Chequer</title>
-	</head>
-	<body>
-	</body>
+    <head>
+        <title>Chequer</title>
+    </head>
+    <body>
+
+    <table>
+        <form action="{{ url_for('index', input=number) }}" method="GET" >
+        <tr><td><input type="number" name="number" step="any" min="0" max="9999999.99" /></td></tr>
+        <tr><td><input type="submit" /></td></tr>
+        <tr><td></td></tr>
+        <tr><td>{{ text }}</td></tr>
+    </table>
+    </body>
 </html>
