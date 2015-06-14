@@ -21,7 +21,7 @@ import unittest
 class GetDigitsGetDecimalsTest(unittest.TestCase):
 
     def test_get_digits_for_number_with_no_digits(self):
-        self.assertEqual(get_digits('.56'), None)
+        self.assertEqual(get_digits('.56'), '0')
 
     def test_get_digits_for_number_with_no_decimals(self):
         self.assertEqual(get_digits('123'), '123')
@@ -214,6 +214,7 @@ class ChequerPublicInterfaceTest(DictComparator):
 
     def test_random_use_cases(self):
         self.expected_results = {
+            '.63': 'RINGGIT MALAYSIA SIFAR DAN SEN ENAM PULUH TIGA SAHAJA',
             '5': 'RINGGIT MALAYSIA LIMA SAHAJA',
             '6.10': 'RINGGIT MALAYSIA ENAM DAN SEN SEPULUH SAHAJA',
             '7.0': 'RINGGIT MALAYSIA TUJUH SAHAJA',

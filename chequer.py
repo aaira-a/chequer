@@ -30,14 +30,12 @@ def chequer_main(numstr):
 def get_digits(numstr):
     try:
         temp = numstr.split('.')[0]
-        if temp == '':
-            return None
-
-        else:
+        if temp:
             return temp
-
+        else:
+            return '0'
     except:
-        return None
+        return '0'
 
 
 def get_decimals(numstr):
